@@ -1,9 +1,18 @@
 # geoblog
-for learn vue 
 
-主要功能如下：
-- 一个登录页，用户可以用Google账户授权登录；
-- 主界面显示一张Google地图，每篇博客都在地图上有相应的标记；
-- 用户点击地图上的标记时，右侧面板展示该标记处的位置信息、博客、点赞数，以及评论列表；
-- 用户点击地图上标记以为的其他地点时，侧边栏面板会显示一个表单，以便用户在此地点新建一篇博客；
-- 应用顶栏展示用户头像和姓名，以及一个定位按钮和一个登录按钮。
+> n
+
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+```
+
+For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
