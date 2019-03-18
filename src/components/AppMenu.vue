@@ -13,8 +13,9 @@
         <span class="username">{{user.profile.displayName}}</span>
       </div>
       <a v-on:click="centerOnUser">
-        <i class="material-icons">power_settings_new</i>
+        <i class="material-icons">my_location</i>
       </a>
+      <a v-on:click="logout"><i class="material-icons">power_settings_new</i></a>
     </div>
   </div>
 </template> 
@@ -33,8 +34,17 @@ export default {
       //todo
     },
     logout() {
-      //todo
-    },
+      if (!this.user) {
+        const userData = {
+          profile: {
+            displayName: "Mr Cat"
+          }
+        };
+        this.$store.commit("user", userData);
+      } else {
+        this.$store.commit("user", null);
+      }
+    }
   }
 };
 </script>
