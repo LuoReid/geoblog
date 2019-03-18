@@ -5,14 +5,21 @@ import App from './App.vue'
 import router from './router'
 import * as filters from './filters'
 
+import store from './store'
+
 for (const key in filters) {
-    Vue.filter(key, filters[key])
+  Vue.filter(key, filters[key])
 }
 
 Vue.use(VueFetch, { baseUrl: 'http://127.0.0.1:3000/', })
 
 function main() {
-    new Vue({ ...App, el: '#app', router })
+  new Vue({
+    ...App,
+    el: '#app',
+    router,
+    store,
+  })
 }
 
 main()
