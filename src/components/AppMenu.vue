@@ -15,37 +15,16 @@
       <a v-on:click="centerOnUser">
         <i class="material-icons">my_location</i>
       </a>
-      <a v-on:click="logout"><i class="material-icons">power_settings_new</i></a>
+      <a v-on:click="logout">
+        <i class="material-icons">power_settings_new</i>
+      </a>
     </div>
   </div>
 </template> 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
-  computed: {
-    user() {
-      return this.$store.getters.user;
-    },
-    userPicture() {
-      return this.$store.getters.userPicture;
-    }
-  },
-  methods: {
-    centerOnUser() {
-      this.$store.dispatch('login')
-    },
-    logout() {
-      // if (!this.user) {
-      //   const userData = {
-      //     profile: {
-      //       displayName: "Mr Cat"
-      //     }
-      //   };
-      //   this.$store.commit("user", userData);
-      // } else {
-      //   this.$store.commit("user", null);
-      // }
-      this.$store.dispatch('logout')
-    }
-  }
+  computed: mapGetters(["user", "userPicture"]),
+  methods: mapActions([{ centerOnUser: "login", logout: "logout" }])
 };
 </script>
