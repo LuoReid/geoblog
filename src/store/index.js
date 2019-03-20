@@ -2,6 +2,10 @@ import Vue from 'vue'
 
 import Vuex from 'vuex'
 
+import $fetch from '../plugins/fetch'
+import router from '../router';
+import { inherits } from 'util';
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -18,19 +22,34 @@ const store = new Vuex.Store({
   },
   getters: {
     user: state => state.user,
-    userPicture: () => null,
+    userPicture: (state, user) => {
+      const user = getters.user
+      if (user) {
+        const photos = user.profile.photos
+        if (photos.length !== 0) {
+          return photos[0].value
+        }
+      }
+    },
   },
   actions: {
     login({ commit }) {
-      const userData = {
-        profile: {
-          displayName: 'Mr Cat',
-        }
+      try {
+        const user = await $fetch('user')
+        commit('user', user)
+      } catch (e) {
+        console.warn(e)
       }
-      commit('user', userData)
     },
     logout({ commit }) {
       commit('user', null)
+      $fetch('logout')
+      if (router.currentRoute.matched.some(r => r.meta.private)) {
+        router.replace({ name: 'login', params: { wantedRoute: router.currentRoute.fullPath } })
+      }
+    },
+    async init({ dispatch }) {
+      await dispatch('login')
     }
   }
 })

@@ -1,5 +1,6 @@
 
 import router from '../router'
+import store from '../store';
 
 let baseUrl
 export default {
@@ -18,7 +19,7 @@ export async function $fetch(url, options) {
     const data = await response.json()
     return data
   } else if (response.status === 403) {
-    //TODO
+    store.dispatch('logout')
   } else {
     const message = await response.text()
     const error = new Error(message)

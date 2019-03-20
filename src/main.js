@@ -14,6 +14,7 @@ for (const key in filters) {
 Vue.use(VueFetch, { baseUrl: 'http://127.0.0.1:3000/', })
 
 function main() {
+  await store.dispatch('init')
   new Vue({
     ...App,
     el: '#app',
