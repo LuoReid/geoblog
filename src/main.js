@@ -7,6 +7,19 @@ import * as filters from './filters'
 
 import store from './store'
 
+import { sync } from 'vuex-router-sync'
+
+import VueGoogleMaps from 'vue-googlemaps'
+
+sync(store, router)
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    apiKey: 'AIzaSyAZJgiipNXNJ2sDWi3mkFZC4gmZB-es2W0',
+    libraries: ['places'],
+  }
+})
+
 for (const key in filters) {
   Vue.filter(key, filters[key])
 }
