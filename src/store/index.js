@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 
 import $fetch from '../plugins/fetch'
 import router from '../router';
-import { inherits } from 'util';
 
 Vue.use(Vuex)
 
