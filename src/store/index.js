@@ -24,7 +24,7 @@ const store = new Vuex.Store({
       const user = getters.user
       if (user) {
         const photos = user.profile.photos
-        if (photos.length !== 0) {
+        if (photos && photos.length !== 0) {
           return photos[0].value
         }
       }
@@ -46,13 +46,11 @@ const store = new Vuex.Store({
       commit('user', userData)
     },
     logout({ commit }) {
-
       // commit('user', null)
       // $fetch('logout')
       // if (router.currentRoute.matched.some(r => r.meta.private)) {
       //   router.replace({ name: 'login', params: { wantedRoute: router.currentRoute.fullPath } })
       // }
-
       commit('user', null)
     },
     async init({ dispatch }) {

@@ -24,23 +24,23 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
-  // computed: mapGetters(["user", "userPicture"]),
-  // methods: mapActions([{ centerOnUser: "login", logout: "logout" }])
-  computed: {
-    user() {
-      return this.$store.state.user;
-    },
-    userPicture() {
-      return null;
-    }
-  },
-  methods: {
-    centerOnUser() {
-      this.$store.dispatch("login");
-    },
-    logout() {
-      this.$store.dispatch("logout");
-    }
-  }
+  computed: mapGetters(["user", "userPicture"]),
+  methods: mapActions({ centerOnUser: "login", logout: "logout" })
+  // computed: {
+  //   user() {
+  //     return this.$store.state.user;
+  //   },
+  //   userPicture() {
+  //     return null;
+  //   }
+  // },
+  // methods: {
+  //   centerOnUser() {
+  //     this.$store.dispatch("login");
+  //   },
+  //   logout() {
+  //     this.$store.dispatch("logout");
+  //   }
+  // }
 };
 </script>
