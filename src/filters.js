@@ -1,5 +1,5 @@
-import moment  from 'moment'
+import moment from 'moment'
 
-export function date(value){
-    return moment(value).format('L')
+export function date(value) {
+  return moment(value).format('L')
 }

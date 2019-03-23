@@ -21,7 +21,7 @@ const store = new Vuex.Store({
   },
   getters: {
     user: state => state.user,
-    userPicture: (state, user) => {
+    userPicture: (state, getters) => {
       const user = getters.user
       if (user) {
         const photos = user.profile.photos
@@ -32,7 +32,7 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    login({ commit }) {
+    async login({ commit }) {
       try {
         const user = await $fetch('user')
         commit('user', user)

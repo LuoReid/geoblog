@@ -1,9 +1,9 @@
 <template>
   <div class="geo-blog">
-    <AppMenu/>
+    <!-- <AppMenu/>
     <div class="panes">
       <BlogMap />
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
