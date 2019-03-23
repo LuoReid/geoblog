@@ -31,29 +31,29 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    async login({ commit }) {
-      try {
-        const user = await $fetch('user')
-        commit('user', user)
-      } catch (e) {
-        console.warn(e)
+    login({ commit }) {
+      // try {
+      //   const user = await $fetch('user')
+      //   commit('user', user)
+      // } catch (e) {
+      //   console.warn(e)
+      // }
+      const userData = {
+        profile: {
+          displayName: 'Mr Cat',
+        },
       }
+      commit('user', userData)
     },
     logout({ commit }) {
-      
+
       // commit('user', null)
       // $fetch('logout')
       // if (router.currentRoute.matched.some(r => r.meta.private)) {
       //   router.replace({ name: 'login', params: { wantedRoute: router.currentRoute.fullPath } })
       // }
-      if(!this.user){
-        const userData = {
-          profile:{ displayName:'Mr Cat',}
-        }
-        this.$store.commit('user',userData)
-      }else{
-        this.$store.commit('user',null)
-      }
+
+      commit('user', null)
     },
     async init({ dispatch }) {
       await dispatch('login')
