@@ -25,8 +25,8 @@ for (const key in filters) {
 
 Vue.use(VueFetch, { baseUrl: 'http://localhost:3000/', })
 
- function main() {
-  // store.dispatch('init')
+ async function main() {
+  await store.dispatch('init')
   new Vue({
     el: '#app',
     router,    
