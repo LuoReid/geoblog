@@ -25,7 +25,7 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   computed: mapGetters(["user", "userPicture"]),
-  methods: mapActions({ centerOnUser: "login", logout: "logout" })
+  methods: mapActions({ centerOnUser: "maps/centerOnUser", logout: "logout" })
   // computed: {
   //   user() {
   //     return this.$store.state.user;

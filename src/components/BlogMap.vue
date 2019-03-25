@@ -7,9 +7,12 @@
       v-on:update:center="setCenter"
       v-on:update:zoom="setZoom"
     />
+    <googlemap-user-position v-on:update:position="setUserPosition"/>
   </div>
 </template>
 <script>
+import {createNamespacedHelpers} from vuex
+const {mapGetters,mapActions} = createNamespacedHelpers ('maps')
 export default {
   data() {
     return {
@@ -21,20 +24,22 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['center','zoom']),
     mapOptions() {
       return {
         fullscreenControl: false
       };
     }
   },
-  methods: {
-    setCenter(value) {
-      this.center = value;
-    },
-    setZoom(value) {
-      this.zoom = value;
-    }
-  }
+  methods:mapActions(['setCenter','setZoom','setUserPosition'])
+  //  {
+  //   setCenter(value) {
+  //     this.center = value;
+  //   },
+  //   setZoom(value) {
+  //     this.zoom = value;
+  //   }
+  // }
 };
 </script>
 

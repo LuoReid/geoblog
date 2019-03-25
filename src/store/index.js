@@ -60,7 +60,11 @@ const store = new Vuex.Store({
     async init({ dispatch }) {
       await dispatch('login')
     }
-  }
+  },
+
+  modules:{
+    maps,
+  },
 })
 
 export default store
