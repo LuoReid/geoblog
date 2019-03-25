@@ -9,7 +9,7 @@ import store from './store';
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', name: 'home', component: GeoBlog, meta: { private: true } },
+  { path: '/', name: 'home', component: GeoBlog }, //, meta: { private: true }
   { path: '/login', name: 'login', component: Login },
   { path: '*', component: NotFound },
 ]
