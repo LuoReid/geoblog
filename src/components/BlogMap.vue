@@ -1,26 +1,26 @@
 <template>
   <div class="blog-map">
-    <googlemaps-map
+    <GmapMap
       v-bind:center="center"
       v-bind:zoom="zoom"
       v-bind:options="mapOptions"
       v-on:update:center="setCenter"
       v-on:update:zoom="setZoom"
     />
-    <googlemap-user-position v-on:update:position="setUserPosition"/>
+    <!-- <googlemap-user-position v-on:update:position="setUserPosition"/> -->
   </div>
 </template>
 <script>
-import {createNamespacedHelpers} from vuex
+import {createNamespacedHelpers} from 'vuex'
 const {mapGetters,mapActions} = createNamespacedHelpers ('maps')
 export default {
   data() {
     return {
-      center: {
-        lat: 48.8538302,
-        lng: 2.2982161
-      },
-      zoom: 15
+      // center: {
+      //   lat: 48.8538302,
+      //   lng: 2.2982161
+      // },
+      // zoom: 15
     };
   },
   computed: {

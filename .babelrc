@@ -3,5 +3,7 @@
     ["env", { "modules": false }],
     "stage-3",
     "babel-preset-stage-3",
-  ]
+    "vue"
+  ],
+  "plugins": ["transform-vue-jsx"]
 }

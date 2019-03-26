@@ -8,8 +8,7 @@ import store from './store'
 
 import { sync } from 'vuex-router-sync'
 
-
-import VueGoogleMaps, * as GMap from 'vue-googlemaps'
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 sync(store, router)
 
