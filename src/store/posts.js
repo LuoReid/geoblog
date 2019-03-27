@@ -10,28 +10,51 @@ export default {
       selectedPostId: null,
     }
   },
-  getters:{
+  getters: {
     draft: state => state.draft,
     posts: state => state.posts,
     selectedPost: state => state.posts.find(p => p._id === state.selectedPostId),
-    currentPost: (state,getters) => state.draft || getters.selectedPost,
+    currentPost: (state, getters) => state.draft || getters.selectedPost,
   },
-  mutations:{
-    addPost(state,value){
+  mutations: {
+    addPost(state, value) {
       state.posts.push(value)
     },
-    draft(state,value){
+    draft(state, value) {
       state.draft = value
     },
-    posts(state,{posts,mapBounds}){
+    posts(state, { posts, mapBounds }) {
       state.posts = posts
       state.mapBounds = mapBounds
     },
-    selectedPostId(state,value){
+    selectedPostId(state, value) {
       state.selectedPostId = value
     },
-    updateDraft(state,value){
-      Object.assign(state.draft,value)
+    updateDraft(state, value) {
+      Object.assign(state.draft, value)
     },
+  },
+  actions: {
+    clearDraft({ commit }) {
+      commit('draft', null)
+    },
+    createDraft({ commit }) {
+      commit('draft', {
+        title: '',
+        content: '',
+        position: null,
+        placeId: null,
+      })
+    },
+    setDraftLocation({dispatch,getters},{position,placeId}){
+      if(!getters.draft){
+        dispatch('createDraft')
+      }
+      dispatch('updateDraft',{position,placeId})
+    },
+    updateDraft({dispatch,commit,getters},draft){
+      commit('updateDraft',draft)
+    },
+    
   }
 }

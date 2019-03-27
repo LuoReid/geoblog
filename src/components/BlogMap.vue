@@ -6,13 +6,21 @@
       v-bind:options="mapOptions"
       v-on:update:center="setCenter"
       v-on:update:zoom="setZoom"
+      v-on:click="onMapClick"
     />
     <!-- <googlemap-user-position v-on:update:position="setUserPosition"/> -->
   </div>
 </template>
 <script>
-import {createNamespacedHelpers} from 'vuex'
-const {mapGetters,mapActions} = createNamespacedHelpers ('maps')
+import { createNamespacedHelpers } from "vuex";
+const {
+  mapGetters: mapsGetters,
+  mapActions: mapsActions
+} = createNamespacedHelpers("maps");
+const {
+  mapGetters: postsGetters,
+  mapActions: postsActions
+} = createNamespacedHelpers("posts");
 export default {
   data() {
     return {
@@ -24,14 +32,24 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['center','zoom']),
+    ...mapsGetters(["center", "zoom"]),
+    ...postsGetters(["draft"]),
     mapOptions() {
       return {
         fullscreenControl: false
       };
     }
   },
-  methods:mapActions(['setCenter','setZoom','setUserPosition'])
+  methods: {
+    ...mapsActions(["setCenter", "setZoom", "setUserPosition"]),
+    ...postsActions(["setDraftLocation"]),
+    onMapClick(event) {
+      this.setDraftLocation({
+        position: event.latLng,
+        placeId: event.placeId
+      });
+    }
+  }
   //  {
   //   setCenter(value) {
   //     this.center = value;
