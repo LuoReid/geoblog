@@ -1,3 +1,4 @@
+import { $fetch } from "../plugins/fetch";
 
 
 export default {
@@ -46,15 +47,25 @@ export default {
         placeId: null,
       })
     },
-    setDraftLocation({dispatch,getters},{position,placeId}){
-      if(!getters.draft){
+    setDraftLocation({ dispatch, getters }, { position, placeId }) {
+      if (!getters.draft) {
         dispatch('createDraft')
       }
-      dispatch('updateDraft',{position,placeId})
+      dispatch('updateDraft', { position, placeId })
     },
-    updateDraft({dispatch,commit,getters},draft){
-      commit('updateDraft',draft)
+    updateDraft({ dispatch, commit, getters }, draft) {
+      commit('updateDraft', draft)
     },
-    
+    async createPost({ commit, dispatch }, draft) {
+      const data = { ...draft, position: draft.position.toJSON() }
+      const result = await $fetch('posts/new', { method: 'POST', body: JSON.stringify(data) })
+      dispatch('clearDraft')
+      commit('addPost', result)
+      dispatch('selectPost', result._id)
+    },
+    async selectPost({ commit }, id) {
+      commit('selectedPostId', id)
+      //get blog detail 
+    }
   }
 }
