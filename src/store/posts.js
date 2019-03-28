@@ -1,5 +1,6 @@
 import { $fetch } from "../plugins/fetch";
 
+let fetchPostsUid = 0
 
 export default {
   namespaced: true,
@@ -66,6 +67,22 @@ export default {
     async selectPost({ commit }, id) {
       commit('selectedPostId', id)
       //get blog detail 
-    }
+    },
+    async fetchPost({ commit, state }, { mapBounds, force }) {
+      let oldBounds = state.mapBounds
+      if (force || !oldBounds || !oldBounds.equals(mapBounds)) {
+        const requestId = ++fetchPostsUid
+        const ne = mapBounds.getNorthEast()
+        const sw = mapBounds.getSouthWest()
+        const query = `posts ne=${encodeURIComponent(ne.toUrlValue())}&sw=${encodeURIComponent(sw.toUrlValue())}`
+        const posts = await $fetch(query)
+        if (requestId === fetchPostsUid) {
+          commit('posts', { posts, mapBounds })
+        }
+      }
+    },
+    setBounds({ dispatch }, value) {
+      dispatch('posts/fetchPosts', { mapBounds: value }, { root: true })
+    },
   }
 }

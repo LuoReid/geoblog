@@ -7,8 +7,23 @@
       v-on:update:center="setCenter"
       v-on:update:zoom="setZoom"
       v-on:click="onMapClick"
+      v-on:idle="onIdle"
     />
-    <!-- <googlemap-user-position v-on:update:position="setUserPosition"/> -->
+    <googlemaps-marker
+      v-for="post of posts"
+      v-bind:key="post._id"
+      v-bind:label="{color:post === currentPost?'where':'black',
+    fontFamily:'Material Icons',
+    fontSize:'20px',
+    text:'face',}"
+    v-bind:position="post.position"
+    v-bind:z-index="5"
+    v-on:click="selectPost(post._id)"
+    />
+      <!--
+      <googlemap-user-position
+      v-on:update:position="setUserPosition"
+    />-->
   </div>
 </template>
 <script>
@@ -42,12 +57,15 @@ export default {
   },
   methods: {
     ...mapsActions(["setCenter", "setZoom", "setUserPosition"]),
-    ...postsActions(["setDraftLocation"]),
+    ...postsActions(["setDraftLocation","selectPost"]),
     onMapClick(event) {
       this.setDraftLocation({
         position: event.latLng,
         placeId: event.placeId
       });
+    },
+    onIdle() {
+      this.setBounds(this.$refs.map.getBounds());
     }
   }
   //  {
