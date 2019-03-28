@@ -34,7 +34,7 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    async  login({ commit }) {
+    async  login({ commit, dispatch }) {
       // try {
       //   const user = await $fetch('user')
       //   console.log(user)
@@ -51,14 +51,16 @@ const store = new Vuex.Store({
         },
       }
       commit('user', userData)
+      dispatch('logged-in')
     },
-    logout({ commit }) {
+    logout({ commit, dispatch }) {
       commit('user', null)
       $fetch('logout')
-      if (router.currentRoute.matched.some(r => r.meta.private)) {
-        router.replace({ name: 'login', params: { wantedRoute: router.currentRoute.fullPath } })
-      }
+      // if (router.currentRoute.matched.some(r => r.meta.private)) {
+      //   router.replace({ name: 'login', params: { wantedRoute: router.currentRoute.fullPath } })
+      // }
       //commit('user', null)
+      // dispatch('posts/logout')
     },
     async init({ dispatch }) {
       await dispatch('login')

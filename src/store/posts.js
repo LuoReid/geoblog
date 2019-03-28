@@ -84,5 +84,24 @@ export default {
     setBounds({ dispatch }, value) {
       dispatch('posts/fetchPosts', { mapBounds: value }, { root: true })
     },
+    // logout({ commit }) {
+    //   commit('posts', { posts: [], mapBounds: null })
+    // }
+    logout: {
+      handle({ commit }) {
+        commit('posts', { posts: [], mapBounds: null })
+      },
+      root: true,
+    },
+    'logged-in': {
+      handle({ dispatch, state }) {
+        if (state.mapBounds) {
+          dispatch('fetchPosts', { mapBounds: state.mapBounds, force: true })
+        }
+        if (state.selectedPostId) {
+          dispatch('selectPost', state.selectedPostId)
+        }
+      }, root: true,
+    }
   }
 }
