@@ -23,7 +23,7 @@
   <div v-else></div>
 </template>
 <script>
-import PlaceDetails from "./PlacedDetails.vue";
+import PlaceDetails from "./PlaceDetails.vue";
 import { createNamespacedHelpers } from "vuex";
 const { mapGetters: postsGetters } = createNamespacedHelpers("posts");
 export default {
